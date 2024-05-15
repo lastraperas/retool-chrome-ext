@@ -19,31 +19,50 @@ function waitForElem(selector) {
   });
 }
 
-waitForElem(".showStatusBar").then((root) => {
-  const container = root.querySelector(".presentation-container");
-  container.firstChild.style.display = "none";
+const doIt = () => {
+  waitForElem(".showStatusBar").then((root) => {
+    // const menuContainer = root.querySelector(
+    //   '.presentation-container > :fi[data-testid="Navigation::RetoolPill"]'
+    // );
+    // // menuContainer.firstChild.style.display = "none";
+    // console.log(menuContainer);
 
-  const canvasContainer = root.querySelector(".retool-canvas-container");
-  canvasContainer.style.marginTop = 0;
-  canvasContainer.style.height = "100vh";
+    const canvasContainer = root.querySelector(".retool-canvas-container");
+    canvasContainer.style.marginTop = 0;
+    canvasContainer.style.height = "100vh";
 
-  const header = container.querySelector(
-    ".presentation-canvas-padding.presentation-canvas-padding--with-pill"
-  );
-  header.firstChild.style.display = "none";
+    const footer = root.children.item(1);
+    const left = footer.children.item(0);
+    left.style.pointerEvents = "none";
 
-  const footer = root.children.item(1);
-  const left = footer.children.item(0);
-  left.style.pointerEvents = "none";
+    const middle = footer.children.item(1);
+    middle.children.item(0).children.item(1).style.display = "none";
 
-  const middle = footer.children.item(1);
-  middle.children.item(0).children.item(1).style.display = "none";
+    const right = footer.children.item(2);
+    right.children.item(1).style.display = "none";
+    right.children.item(2).style.display = "none";
+  });
 
-  const right = footer.children.item(2);
-  right.children.item(1).style.display = "none";
-  right.children.item(2).style.display = "none";
+  waitForElem('[aria-label="Menu"]').then((menu) => {
+    menu.addEventListener("click", () => {
+      waitForElem(
+        ".ant-dropdown.user-utility-dropdown.large.ant-dropdown-placement-topLeft "
+      ).then((dropdown) => {
+        const menuItems = dropdown.querySelectorAll("ul > *");
+        menuItems.forEach((li, index) => {
+          if (index < menuItems.length - 2) {
+            li.style.display = "none";
+          }
+        });
+      });
+    });
+  });
+};
+
+chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+  if (request.message === "TabUpdated") {
+    setTimeout(doIt, 750);
+  }
 });
 
-waitForElem('[data-testid="QueryStatus::RerunQueriesButton]"').then((btn) => {
-  btn.style.display = "none";
-});
+doIt();
