@@ -64,7 +64,7 @@ const doIt = () => {
 
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   if (request.message === "TabUpdated") {
-    setTimeout(doIt, 750);
+    setTimeout(doIt, 1000);
   }
 });
 
