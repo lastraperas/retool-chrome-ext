@@ -26,7 +26,7 @@ const doIt = () => {
     canvasContainer.style.marginTop = 0;
     canvasContainer.style.height = "100vh";
 
-    // deabilitar cambios de stage y version
+    // desabilitar cambios de stage y version
     const footer = root.children.item(1);
     const left = footer.children.item(0);
     left.style.pointerEvents = "none";
@@ -38,28 +38,11 @@ const doIt = () => {
   });
 
   // ocultar logo de retool del menu
-  waitForElem(
-    '[data-testid="Navigation::FloatingPresentationNav"] > div > div > button'
-  ).then((menuContainer) => {
-    menuContainer.firstChild.style.display = "none";
-    menuContainer.children.item(1).style.display = "none";
-  });
-
-  // ocultar items de menu
-  // waitForElem('[aria-label="Menu"]').then((menu) => {
-  //   menu.addEventListener("mousedown", () => {
-  //     waitForElem(
-  //       ".ant-dropdown.user-utility-dropdown.large.ant-dropdown-placement-topLeft "
-  //     ).then((dropdown) => {
-  //       const menuItems = dropdown.querySelectorAll("ul > *");
-  //       menuItems.forEach((li, index) => {
-  //         if (index < menuItems.length - 2) {
-  //           li.style.display = "none";
-  //         }
-  //       });
-  //     });
-  //   });
-  // });
+  waitForElem('[data-testid="Navigation::FloatingPresentationNav"]').then(
+    (menuContainer) => {
+      menuContainer.style.display = "none";
+    }
+  );
 };
 
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {

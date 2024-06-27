@@ -3,18 +3,3 @@ button.Bp6KBY.iZlf01,
   // reset app state footer button
   display: none;
 }
-
-.ant-dropdown-menu.retool-dropdown-menu.top-nav-user-menu.clear-padding.ant-dropdown-menu-light.ant-dropdown-menu-root.ant-dropdown-menu-vertical
-  > li {
-  display: none;
-}
-
-.ant-dropdown-menu.retool-dropdown-menu.top-nav-user-menu.clear-padding.ant-dropdown-menu-light.ant-dropdown-menu-root.ant-dropdown-menu-vertical
-  > hr {
-  display: none;
-}
-
-.ant-dropdown-menu.retool-dropdown-menu.top-nav-user-menu.clear-padding.ant-dropdown-menu-light.ant-dropdown-menu-root.ant-dropdown-menu-vertical
-  > li:nth-last-child(2) {
-  display: block;
-}
